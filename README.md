@@ -63,14 +63,18 @@ npm run build
 ***4.2.1 CatalogModel — каталог товаров***
 
 **Назначение:** единственный источник информации о загруженных товарах каталога, а также о выбранном пользователем товаре для предварительного просмотра.
+
 **Наследование:** extends Model<ICatalogModel>.
+
 **Конструктор:** (data: Partial<ICatalogModel>, events: IEvents)
 - data — начальное состояние (может быть пустым).
 - events — экземпляр брокера событий для взаимодействия с другими слоями.
+
 **Поля:**
 - _items: IProduct[] — актуальный список товаров.
 - _preview: string \| null — id товара, выбранного для превью, либо null.
 - _loading: boolean — индикатор загрузки каталога.
+
 **Методы:**
 - setItems(items: IProduct[]): void — сохраняет массив товаров и эмитит items:changed.
 - getItems(): IProduct[] — возвращает копию массива _items.
@@ -84,11 +88,15 @@ npm run build
 ***4.2.2 BasketModel — корзина покупателя***
 
 **Назначение:** управляет набором выбранных товаров и предоставляет агрегированные данные (количество, сумма).
+
 **Наследование:** extends Model<IBasketModel>.
-**.** Конструктор: (data: Partial<IBasketModel>, events: IEvents).
+
+**Конструктор:** (data: Partial<IBasketModel>, events: IEvents).
+
 **Поля:**
 - _items: Map<string, IBasketItem> — коллекция позиций в корзине, ключ — id товара.
-**.** Методы
+
+**Методы**
 - add(product: IProduct): void — кладёт товар в корзину и эмитит basket:changed.
 - remove(id: string): void — убирает товар и эмитит basket:changed.
 - clear(): void — очищает корзину.
@@ -100,14 +108,19 @@ npm run build
 ***4.2.3 OrderModel — оформление заказа***
 
 **Назначение:** хранит данные, введённые в формах оплаты и контактов, выполняет валидацию и формирует финальный объект IOrder на основании данных корзины.
+
 **Наследование:** extends Model<IOrderModel>.
+
 **Конструктор:** (data: Partial<IOrderModel>, events: IEvents, basketModel: IBasketModel)
 - basketModel передаётся для вычисления суммы и списка товаров — таким образом, стоимость и состав заказа не дублируются, а вычисляются на лету (SSOT).
+
 **Поля:**
 - _orderForm: IOrderForm & IContactsForm — промежуточные данные, введённые пользователем.
 - formErrors: FormErrors — объект текущих ошибок валидации.
+
 **Геттеры:**
 - order: IOrder — актуальный объект заказа, собирается из _orderForm и basketModel.
+
 **Методы:**
 - setField(field, value): void — обновляет любое поле заказа (способ оплаты, адрес, email, телефон) и автоматически проводит валидацию всех полей. При изменении эмитит события formErrors:change, а при успешной валидации частей формы — order:ready или contacts:ready.
 - clearOrder(): void — сбрасывает данные заказа и эмитит order:clear.
@@ -127,8 +140,11 @@ npm run build
 | Page |	src/components/views/Page.ts	| Шапка, основной контейнер. Отображает счётчик корзины. |
 
 ***4.3.1 Card — карточка товара***
+
 **Наследование:** extends Component<ICard>
+
  **Конструктор:**(container: HTMLElement, actions?: ICardActions)
+
 **Сохраняемые элементы**
 - _title – заголовок товара (h3)
 - _image – картинка (img)
@@ -136,72 +152,100 @@ npm run build
 - _category – категория (span)
 - _description – описание (p / li)
 - _button – «В корзину» / «Убрать из корзины» (button)
+
 **Методы:** свойства устанавливаются через метод render(data), который принимает объект с полями id, title, image, price, category, description, button.
 
 ***4.3.2 Basket — список корзины***
 
 **Наследование:** extends Component<IBasketView>
+
 **Конструктор:** (container: HTMLElement, events: IEvents)
+
 **Сохраняемые элементы**
 - _list – контейнер для позиций корзины (ul)
 - _total – сумма заказа (span)
 - _button – кнопка «Оформить» (button)
+
 **Методы/сеттеры:** items, total, buttonDisabled.
 
 ***4.3.3 Modal — всплывающее окно***
 
 **Наследование:** extends Component<IModalData>
+
 **Конструктор:** (container: HTMLElement, events: IEvents)
+
 **Сохраняемые элементы**
 - _closeButton – крестик закрытия (button)
 - _content – область контента (div)
+
 **Методы:** content, open, close, render.
 
 ***4.3.4 Form***
 
 **Наследование:**  extends Component<IForm>
+
 **Конструктор:** (container: HTMLFormElement, events: IEvents)
+
 **Сохраняемые элементы**
 - _submit – кнопка отправки формы (button)
 - _errors – блок ошибок валидации (div / span)
+
 **Методы:** onInputChange, valid, errors, render.
+
 
 ***4.3.5 OrderForm — выбор оплаты и адреса***
 
 **Наследование:**  extends Form<IOrderForm>
+
 **Конструктор:**  (container: HTMLFormElement, events: IEvents)
+
 **Сохраняемые элементы**
 - _paymentButtons – массив кнопок способов оплаты (button)
 - _addressInput – поле адреса (input)
+
 **Методы:** address, render 
+
 
 ***4.3.6 ContactsForm — контактные данные***
 
 **Наследование:** extends Form<IContactsForm>
+
 **Конструктор:** (container: HTMLFormElement, events: IEvents)
+
 **Сохраняемые элементы**
 - _emailInput – поле email (input)
 - _phoneInput – поле телефона (input)
+
 **Методы:** email, phone.
 
+
 ***4.3.7 Success — окно успешной оплаты***
+
 **Наследование:** extends Component<ISuccess>
+
 **Конструктор:** (container: HTMLElement, actions: ISuccessActions)
+
 **Сохраняемые элементы**
 - _close – кнопка закрытия (button)
 - _total – сумма заказа (span)
+
 **Методы:** total.
+
 
 ***4.3.8 Page — обёртка страницы***
 
 **Наследование:** extends Component<IPage>
+
 **Конструктор:** (container: HTMLElement, events: IEvents)
+
 **Сохраняемые элементы**
 - _counter – счётчик товаров в корзине (span)
 - _catalog – грид каталога (section / div)
 - _wrapper – обёртка контента (div)
 - _basket – иконка/кнопка корзины (button / div)
+
 **Методы/сеттеры:** counter, catalog, locked.
+
 
 **5. Взаимодействие компонентов**
 
