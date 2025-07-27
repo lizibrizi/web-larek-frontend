@@ -43,31 +43,27 @@ export class Card extends Component<ICard> {
 		}
 	}
 
-	/**
-	 * Установить ID карточки
-	 */
+	// Установить ID карточки
+	 
 	set id(value: string) {
 		this.container.dataset.id = value;
 	}
 
-	/**
-	 * Установить заголовок
-	 */
+    //Установить заголовок
+	
 	set title(value: string) {
 		this.setText(this._title, value);
 	}
 
-	/**
-	 * Установить изображение
-	 */
+	// Установить изображение
+	 
 	set image(value: string) {
 		const alt = this._title.textContent || '';
 		this.setImage(this._image, value, alt);
 	}
 
-	/**
-	 * Установить цену
-	 */
+	// Установить цену
+	 
 	set price(value: number | null) {
 		this.setText(this._price, value ? `${value} синапсов` : 'Бесценно');
 		if (this._button && !value) {
@@ -75,9 +71,8 @@ export class Card extends Component<ICard> {
 		}
 	}
 
-	/**
-	 * Установить категорию
-	 */
+	//Установить категорию
+	 
 	set category(value: CategoryType) {
 		this.setText(this._category, value);
 		this.toggleClass(
@@ -107,11 +102,10 @@ export class Card extends Component<ICard> {
 		);
 	}
 
-	/**
-	 * Установить описание
-	 */
+	// Установить описание
+	 
 	set description(value: string | string[]) {
-		// _description может отсутствовать в некоторых шаблонах
+		// description может отсутствовать в некоторых шаблонах
 		if (!this._description) return;
 
 		if (Array.isArray(value)) {
@@ -132,16 +126,14 @@ export class Card extends Component<ICard> {
 		}
 	}
 
-	/**
-	 * Установить текст кнопки
-	 */
+	// Установить текст кнопки
+	 
 	set button(value: string) {
 		this.setText(this._button, value);
 	}
 
-	/**
-	 * Заблокировать кнопку
-	 */
+	// Заблокировать кнопку
+	 
 	set buttonDisabled(value: boolean) {
 		this.setDisabled(this._button, value);
 	}

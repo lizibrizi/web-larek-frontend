@@ -17,16 +17,14 @@ export class ContactsForm extends Form<IContactsForm> {
 		) as HTMLInputElement;
 	}
 
-	/**
-	 * Установить email
-	 */
+	//Установить email
+	 
 	set email(value: string) {
 		this._emailInput.value = value;
 	}
 
-	/**
-	 * Установить телефон
-	 */
+	// Установить телефон
+	 
 	set phone(value: string) {
 		this._phoneInput.value = value;
 	}

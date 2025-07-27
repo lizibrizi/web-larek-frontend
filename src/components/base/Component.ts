@@ -1,54 +1,40 @@
 import { IComponent } from '../../types';
 
-/**
- * Базовый компонент
- */
+//абстрактный класс, который принимает обобщенный тип и реализует интерфейс
 export abstract class Component<T> implements IComponent<T> {
 	protected constructor(protected readonly container: HTMLElement) {}
 
-	/**
-	 * Переключить класс
-	 */
+//переключить класс у переданного элемента
 	toggleClass(element: HTMLElement, className: string, force?: boolean): void {
-		element.classList.toggle(className, force);
+		element.classList.toggle(className, force); //класс либо добавится либо удалится
 	}
 
-	/**
-	 * Установить текстовое содержимое
-	 */
+//устанавливает текстовое содержимое
 	protected setText(element: HTMLElement, value: unknown): void {
 		if (element) {
 			element.textContent = String(value);
 		}
 	}
 
-	/**
-	 * Сменить статус блокировки
-	 */
+	//сменить статус блокировки
 	setDisabled(element: HTMLElement, state: boolean): void {
 		if (element) {
 			if (state) element.setAttribute('disabled', 'disabled');
 			else element.removeAttribute('disabled');
 		}
 	}
-
-	/**
-	 * Скрыть элемент
-	 */
+//скрыть элемент с помощью css
 	protected setHidden(element: HTMLElement): void {
 		element.style.display = 'none';
 	}
 
-	/**
-	 * Показать элемент
-	 */
+//показать элемент
 	protected setVisible(element: HTMLElement): void {
 		element.style.removeProperty('display');
 	}
 
-	/**
-	 * Установить изображение с альтернативным текстом
-	 */
+	//Установить изображение с альтернативным текстом
+
 	protected setImage(
 		element: HTMLImageElement,
 		src: string,
@@ -62,9 +48,8 @@ export abstract class Component<T> implements IComponent<T> {
 		}
 	}
 
-	/**
-	 * Вернуть корневой DOM-элемент
-	 */
+//возвращает корневой DOM-элемент
+	
 	render(data?: T): HTMLElement {
 		Object.assign(this as object, data ?? {});
 		return this.container;

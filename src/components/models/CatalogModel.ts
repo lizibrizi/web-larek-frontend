@@ -14,50 +14,45 @@ export class CatalogModel
 		super(data, events);
 	}
 
-	/**
-	 * Установить товары в каталоге
-	 */
+	//установить товары в каталоге
+	 
 	setItems(items: IProduct[]): void {
 		this._items = items;
 		this.emitChanges('items:changed', this._items);
 	}
-
-	/**
-	 * Получить товар по ID
-	 */
+    
+    //получить товар по ID
+	 
 	getProduct(id: string): IProduct | undefined {
 		return this._items.find((item) => item.id === id);
 	}
 
-	/**
-	 * Установить товар для предварительного просмотра
-	 */
+	//установить товар для предварительного просмотра
+	 
 	setPreview(product: IProduct): void {
 		this._preview = product.id;
 		this.emitChanges('preview:changed', product);
 	}
 
-	/**
-	 * Получить товар для предварительного просмотра
-	 */
+    //получить товар для предварительного просмотра
+	 
 	getPreview(): IProduct | null {
 		if (!this._preview) return null;
 		return this.getProduct(this._preview) || null;
 	}
 
-	/**
-	 * Установить состояние загрузки
-	 */
+	//установить состояние загрузки
+	 
 	setLoading(state: boolean): void {
 		this._loading = state;
 	}
 
-	/** Получить все товары */
+	//получить все товары 
 	getItems(): IProduct[] {
 		return [...this._items];
 	}
 
-	/** Флаг загрузки */
+	//флаг загрузки 
 	isLoading(): boolean {
 		return this._loading;
 	}

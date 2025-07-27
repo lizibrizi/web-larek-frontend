@@ -32,9 +32,8 @@ export class OrderForm extends Form<IOrderForm> {
 		});
 	}
 
-	/**
-	 * Установить адрес доставки
-	 */
+	// Установить адрес доставки
+	 
 	set address(value: string) {
 		this._addressInput.value = value;
 	}

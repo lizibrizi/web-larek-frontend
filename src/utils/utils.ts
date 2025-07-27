@@ -84,9 +84,8 @@ export function getObjectProperties(
 		.map(([name]) => name);
 }
 
-/**
- * Устанавливает dataset атрибуты элемента
- */
+// Устанавливает dataset атрибуты элемента
+ 
 export function setElementData<T extends Record<string, unknown> | object>(
 	el: HTMLElement,
 	data: T
@@ -96,9 +95,8 @@ export function setElementData<T extends Record<string, unknown> | object>(
 	}
 }
 
-/**
- * Получает типизированные данные из dataset атрибутов элемента
- */
+//Получает типизированные данные из dataset атрибутов элемента
+ 
 export function getElementData<T extends Record<string, unknown>>(
 	el: HTMLElement,
 	scheme: Record<string, (value: string) => unknown>
@@ -114,9 +112,8 @@ export function getElementData<T extends Record<string, unknown>>(
 	return data as T;
 }
 
-/**
- * Проверка на простой объект
- */
+// Проверка на простой объект
+ 
 export function isPlainObject(obj: unknown): obj is object {
 	const prototype = Object.getPrototypeOf(obj);
 	return prototype === Object.getPrototypeOf({}) || prototype === null;
@@ -126,9 +123,8 @@ export function isBoolean(v: unknown): v is boolean {
 	return typeof v === 'boolean';
 }
 
-/**
- * Фабрика DOM-элементов в простейшей реализации
- */
+// Фабрика DOM-элементов в простейшей реализации
+ 
 export function createElement<T extends HTMLElement>(
 	tagName: keyof HTMLElementTagNameMap,
 	props?: Partial<Record<keyof T, string | boolean | object>>,
@@ -141,8 +137,7 @@ export function createElement<T extends HTMLElement>(
 			if (isPlainObject(value) && key === 'dataset') {
 				setElementData(element, value);
 			} else {
-				// @ts-expect-error fix indexing later
-				element[key] = isBoolean(value) ? value : String(value);
+				element[key as keyof T] = isBoolean(value) ? value : String(value) as any;
 			}
 		}
 	}

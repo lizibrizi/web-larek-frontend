@@ -29,33 +29,29 @@ export class Modal extends Component<IModalData> implements IModal {
 		this._content.addEventListener('click', (event) => event.stopPropagation());
 	}
 
-	/**
-	 * Установить содержимое модального окна
-	 */
+	//Установить содержимое модального окна
+	 
 	set content(value: HTMLElement) {
 		this._content.replaceChildren(value);
 	}
 
-	/**
-	 * Открыть модальное окно
-	 */
+	//Открыть модальное окно
+	 
 	open(): void {
 		this.toggleClass(this.container, 'modal_active', true);
 		this.events.emit('modal:open');
 	}
 
-	/**
-	 * Закрыть модальное окно
-	 */
+	// Закрыть модальное окно
+	 
 	close(): void {
 		this.toggleClass(this.container, 'modal_active', false);
 		this.content = document.createElement('div');
 		this.events.emit('modal:close');
 	}
 
-	/**
-	 * Рендер модального окна с содержимым
-	 */
+	// Рендер модального окна с содержимым
+	 
 	render(data: IModalData): HTMLElement {
 		super.render(data);
 		this.open();

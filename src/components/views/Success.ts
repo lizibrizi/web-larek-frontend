@@ -21,9 +21,8 @@ export class Success extends Component<ISuccess> {
 		});
 	}
 
-	/**
-	 * Установить общую стоимость заказа
-	 */
+	// Установить общую стоимость заказа
+	 
 	set total(value: number) {
 		this.setText(this._total, `Списано ${value} синапсов`);
 	}

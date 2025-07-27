@@ -5,14 +5,12 @@ import { IEvents } from '../base/events';
 export class BasketModel extends Model<IBasketModel> implements IBasketModel {
 	// внутреннее хранилище корзины – не доступно извне
 	private _items: Map<string, IBasketItem> = new Map();
-
 	constructor(data: Partial<IBasketModel>, events: IEvents) {
 		super(data, events);
 	}
 
-	/**
-	 * Добавить товар в корзину
-	 */
+	//добавляет товар
+
 	add(product: IProduct): void {
 		if (product.price === null) {
 			return; // Товары без цены нельзя добавлять в корзину
@@ -26,25 +24,22 @@ export class BasketModel extends Model<IBasketModel> implements IBasketModel {
 		this.emitChanges('basket:changed', this.getItems());
 	}
 
-	/**
-	 * Удалить товар из корзины
-	 */
+	//удаляет товар
+
 	remove(id: string): void {
 		this._items.delete(id);
 		this.emitChanges('basket:changed', this.getItems());
 	}
 
-	/**
-	 * Очистить корзину
-	 */
+//очистить корзину
+
 	clear(): void {
 		this._items.clear();
 		this.emitChanges('basket:changed', this.getItems());
 	}
 
-	/**
-	 * Получить общую стоимость товаров в корзине
-	 */
+	//получить общую стоимость товаров в корзине
+	 
 	getTotal(): number {
 		return Array.from(this._items.values()).reduce(
 			(total, item) => total + item.price,
@@ -52,23 +47,20 @@ export class BasketModel extends Model<IBasketModel> implements IBasketModel {
 		);
 	}
 
-	/**
-	 * Получить количество товаров в корзине
-	 */
+	//получить количество товаров в корзине
+	 
 	getCount(): number {
 		return this._items.size;
 	}
 
-	/**
-	 * Проверить, содержится ли товар в корзине
-	 */
+//проверить, содержится ли товар в корзине
+	 
 	contains(id: string): boolean {
 		return this._items.has(id);
 	}
 
-	/**
-	 * Получить все товары в корзине
-	 */
+	//получить все товары в корзине
+	 
 	getItems(): IBasketItem[] {
 		return Array.from(this._items.values());
 	}

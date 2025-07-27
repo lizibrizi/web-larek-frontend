@@ -1,12 +1,12 @@
 import './scss/styles.scss';
 
-import { EventEmitter } from './components/base/base/events';
+import { EventEmitter } from './components/base/events';
 import { WebLarekAPI } from './components/api/WebLarekAPI';
 import { API_URL, CDN_URL, settings } from './utils/constants';
 import { cloneTemplate, ensureElement } from './utils/utils';
 
 // Модели данных
-import { CatalogModel } from './components/models/CatalogModel';
+import { CatalogModel } from './components/models/CatalogModel'; 
 import { BasketModel } from './components/models/BasketModel';
 import { OrderModel } from './components/models/OrderModel';
 

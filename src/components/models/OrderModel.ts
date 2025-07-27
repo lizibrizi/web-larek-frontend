@@ -39,9 +39,8 @@ export class OrderModel extends Model<IOrderModel> implements IOrderModel {
 		};
 	}
 
-	/**
-	 * Установить значение поля заказа
-	 */
+	//установить значение поля заказа
+	 
 	setField(
 		field: keyof (IOrderForm & IContactsForm),
 		value: string | PaymentMethod
@@ -65,7 +64,7 @@ export class OrderModel extends Model<IOrderModel> implements IOrderModel {
 		}
 
 		// Проверка контактов
-		// По ТЗ требуется лишь факт заполнения поля
+		
 		if (!this._orderForm.email) {
 			errors.email = 'Необходимо указать email';
 		}
@@ -88,12 +87,8 @@ export class OrderModel extends Model<IOrderModel> implements IOrderModel {
 		}
 	}
 
-	// Методы validateOrder / validateContacts были удалены как неиспользуемые:
-	// вся актуальная проверка выполняется при изменении полей в setField.
-
-	/**
-	 * Очистить заказ
-	 */
+	//Очистить заказ
+	 
 	clearOrder(): void {
 		this._orderForm = {
 			payment: null,
@@ -105,10 +100,8 @@ export class OrderModel extends Model<IOrderModel> implements IOrderModel {
 		this.events.emit('order:clear', this.order);
 	}
 
-	/**
-	 * Получить заказ для отправки на сервер. Сумма и список товаров
-	 * формируются динамически из модели корзины.
-	 */
+	// Получить заказ для отправки на сервер. Сумма и список товаров, формируются динамически из модели корзины.
+	 
 	getOrderData(): IOrder {
 		return this.order; // геттер вернёт актуальное состояние
 	}

@@ -33,9 +33,8 @@ export class Form<T> extends Component<IForm> {
 		});
 	}
 
-	/**
-	 * Обработчик изменения поля формы
-	 */
+	// Обработчик изменения поля формы
+	 
 	protected onInputChange(field: keyof T, value: string) {
 		this.events.emit(`${this.container.name}.${String(field)}:change`, {
 			field,
@@ -43,23 +42,20 @@ export class Form<T> extends Component<IForm> {
 		});
 	}
 
-	/**
-	 * Установить валидность формы
-	 */
+	//Установить валидность формы
+	 
 	set valid(value: boolean) {
 		this.setDisabled(this._submit, !value);
 	}
 
-	/**
-	 * Установить ошибки валидации
-	 */
+	// Установить ошибки валидации
+	 
 	set errors(list: string[]) {
 		this.setText(this._errors, list.join(', '));
 	}
 
-	/**
-	 * Рендер формы
-	 */
+	//Рендер формы
+	 
 	render(state: Partial<T> & IForm) {
 		const { valid, errors, ...inputs } = state;
 		super.render({ valid, errors });

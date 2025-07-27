@@ -29,9 +29,8 @@ export class Basket extends Component<IBasketView> {
 		this.buttonDisabled = true;
 	}
 
-	/**
-	 * Установить список товаров в корзине
-	 */
+	// Установить список товаров в корзине
+	 
 	set items(items: HTMLElement[]) {
 		if (items.length) {
 			this._list.replaceChildren(...items);
@@ -44,16 +43,14 @@ export class Basket extends Component<IBasketView> {
 		}
 	}
 
-	/**
-	 * Установить общую стоимость
-	 */
+	// Установить общую стоимость
+	 
 	set total(total: number) {
 		this.setText(this._total, `${total} синапсов`);
 	}
 
-	/**
-	 * Заблокировать кнопку оформления заказа
-	 */
+	// Заблокировать кнопку оформления заказа
+	 
 	set buttonDisabled(value: boolean) {
 		this.setDisabled(this._button, value);
 	}

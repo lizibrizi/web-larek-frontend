@@ -25,23 +25,20 @@ export class Page extends Component<IPage> {
 		});
 	}
 
-	/**
-	 * Установить счетчик товаров в корзине
-	 */
+	//Установить счетчик товаров в корзине
+	 
 	set counter(value: number) {
 		this.setText(this._counter, String(value));
 	}
 
-	/**
-	 * Установить каталог товаров
-	 */
+	// Установить каталог товаров
+	 
 	set catalog(items: HTMLElement[]) {
 		this._catalog.replaceChildren(...items);
 	}
 
-	/**
-	 * Заблокировать/разблокировать прокрутку страницы
-	 */
+	// Заблокировать/разблокировать прокрутку страницы
+	 
 	set locked(value: boolean) {
 		if (value && !this._isLocked) {
 			// Сохраняем текущий скролл и «замораживаем» позицию
