@@ -1,8 +1,10 @@
+//тип-обертка
 export type ApiListResponse<Type> = {
     total: number,
     items: Type[]
 };
 
+//методы
 export type ApiPostMethods = 'POST' | 'PUT' | 'DELETE';
 
 export class Api {
@@ -19,6 +21,7 @@ export class Api {
         };
     }
 
+    //обработчик ответа
     protected handleResponse(response: Response): Promise<object> {
         if (response.ok) return response.json();
         else return response.json()
