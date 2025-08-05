@@ -11,11 +11,11 @@ export interface IEvents {
     trigger<T extends object>(event: string, context?: Partial<T>): (data: T) => void;
 }
 
-// 
+
 //  Брокер событий, классическая реализация
 //   В расширенных вариантах есть возможность подписаться на все события
 //   или слушать события по шаблону например
-//  
+
 export class EventEmitter implements IEvents {
     _events: Map<EventName, Set<Subscriber>>;
 
