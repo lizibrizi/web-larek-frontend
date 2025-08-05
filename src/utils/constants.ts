@@ -1,6 +1,30 @@
+import { EventEmitter } from '../components/base/events';
+
 export const API_URL = `${process.env.API_ORIGIN}/api/weblarek`;
 export const CDN_URL = `${process.env.API_ORIGIN}/content/weblarek`;
 
-export const settings = {
+export const settings = {};
 
-};
+export const globalEventEmitter = new EventEmitter();
+
+export const EVENTS = {
+	PRODUCT_LIST_LOADED: 'PRODUCT_LIST_LOADED',
+	PRODUCT_LIST_LOAD_FAILED: 'PRODUCT_LIST_LOAD_FAILED',
+	PRODUCT_PREVIEW_CLICK: 'PRODUCT_PREVIEW_CLICK',
+
+	PRODUCT_LOADED: 'PRODUCT_LOADED',
+	PRODUCT_LOAD_FAILED: 'PRODUCT_LOAD_FAILED',
+
+	MODAL_OPEN: 'MODAL_OPEN',
+	MODAL_CLOSE: 'MODAL_CLOSE',
+	MODAL_SET_CONTENT: 'MODAL_SET_CONTENT',
+
+	ADD_TO_CART: 'ADD_TO_CART',
+	CART_UPDATED: 'CART_UPDATED',
+	TO_CHECKOUT_CLICK: 'TO_CHECKOUT_CLICK',
+
+	ORDER_DETAILS_UPDATED: 'ORDER_DETAILS_UPDATED',
+	TO_CONTACTS_CLICK: 'TO_CONTACTS_CLICK',
+	ORDER_SUBMITTED: 'ORDER_SUBMITTED',
+	ORDER_SUBMIT_FAILED: 'ORDER_SUBMIT_FAILED',
+} as const;
